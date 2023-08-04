@@ -1,0 +1,26 @@
+{
+  "name": "nody",
+  "version": "1.0.0",
+  "description": "Just some Node.js helper",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier . --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Schascha/nody.git"
+  },
+  "keywords": [
+    "JS",
+    "Node.js"
+  ],
+  "author": "Sascha Künstler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Schascha/nody/issues"
+  },
+  "homepage": "https://github.com/Schascha/nody#readme",
+  "devDependencies": {
+    "prettier": "^3.0.1"
+  }
+}
