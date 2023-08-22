@@ -11,6 +11,11 @@ const formats = {
 };
 
 const types = {
+  complete: {
+    badge: '☒',
+    color: 'cyan',
+    label: 'Complete',
+  },
   error: {
     badge: '✘',
     color: 'red',
@@ -20,6 +25,11 @@ const types = {
     badge: 'ℹ',
     color: 'blue',
     label: 'Info',
+  },
+  pending: {
+    badge: '☐',
+    color: 'magenta',
+    label: 'Pending',
   },
   success: {
     badge: '✔',
@@ -39,19 +49,10 @@ class Log {
       (a, { label }) => Math.max(a, label.length),
       0,
     );
-  }
 
-  error(str, err) {
-    const message = this._message('error', str);
-    console.log(err ? new Error(message, { cause: err }) : message);
-  }
-
-  info(str) {
-    console.log(this._message('info', str));
-  }
-
-  warning(str) {
-    console.log(this._message('warning', str));
+    Object.keys(types).forEach((type) => {
+      this[type] = this._log.bind(this, type);
+    });
   }
 
   format(format, str) {
@@ -59,17 +60,23 @@ class Log {
     return start && end ? `\x1b[${start}m${str}\x1b[${end}m` : str;
   }
 
-  _message(type, str) {
+  _log(type, ...args) {
     const { format, labelLength } = this;
     const { badge, color, label } = types[type];
-    return format(
-      color,
-      [
-        badge,
-        format('underline', label),
-        ''.padStart(labelLength - label.length),
-        format('grey', str),
-      ].join(' '),
+    console.log(
+      format(
+        color,
+        [
+          badge,
+          format('underline', label),
+          ''.padStart(labelLength - label.length),
+        ].join(' '),
+      ),
+      ...args.map((arg) =>
+        arg instanceof Error || typeof arg === 'object'
+          ? arg
+          : format('grey', arg),
+      ),
     );
   }
 }
