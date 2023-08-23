@@ -1,47 +1,5 @@
-const formats = {
-  red: [31, 39],
-  green: [32, 39],
-  yellow: [33, 39],
-  blue: [34, 39],
-  magenta: [35, 39],
-  cyan: [36, 39],
-  grey: [90, 39],
-  bold: [1, 22],
-  underline: [4, 24],
-};
-
-const types = {
-  complete: {
-    badge: '☒',
-    color: 'cyan',
-    label: 'Complete',
-  },
-  error: {
-    badge: '✘',
-    color: 'red',
-    label: 'Error',
-  },
-  info: {
-    badge: 'ℹ',
-    color: 'blue',
-    label: 'Info',
-  },
-  pending: {
-    badge: '☐',
-    color: 'magenta',
-    label: 'Pending',
-  },
-  success: {
-    badge: '✔',
-    color: 'green',
-    label: 'Success',
-  },
-  warning: {
-    badge: '⚠',
-    color: 'yellow',
-    label: 'Warning',
-  },
-};
+const formats = require('./formats');
+const types = require('./types');
 
 class Log {
   constructor(options = {}) {

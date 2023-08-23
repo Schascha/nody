@@ -1,5 +1,5 @@
-const log = require('./src/log');
-const { Log } = require('./src/log');
+const log = require('./log');
+const { Log } = require('./log');
 
 // Default types
 log.error('foo');
