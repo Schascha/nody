@@ -27,9 +27,8 @@ class Log {
       format(
         color,
         [
-          badge,
-          format('underline', label),
-          ''.padStart(labelLength - label.length),
+          badge + '',
+          format('underline', label) + ''.padStart(labelLength - label.length + 1)
         ].join(' '),
       ),
       ...args.map((arg) =>
