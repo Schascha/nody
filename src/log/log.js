@@ -3,6 +3,7 @@ const types = require('./types');
 
 class Log {
   constructor(options = {}) {
+    this.stream = options.stream || console.log;
     this.types = Object.assign({}, types, options.types);
     this.labelLength = Object.values(this.types).reduce(
       (a, { label }) => Math.max(a, label.length),
@@ -20,9 +21,9 @@ class Log {
   }
 
   _log(type, ...args) {
-    const { format, labelLength, types } = this;
+    const { format, labelLength, stream, types } = this;
     const { badge, color, label } = types[type];
-    console.log(
+    stream(
       format(
         color,
         [
