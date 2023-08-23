@@ -44,13 +44,14 @@ const types = {
 };
 
 class Log {
-  constructor() {
-    this.labelLength = Object.values(types).reduce(
+  constructor(options = {}) {
+    this.types = Object.assign({}, types, options.types);
+    this.labelLength = Object.values(this.types).reduce(
       (a, { label }) => Math.max(a, label.length),
       0,
     );
 
-    Object.keys(types).forEach((type) => {
+    Object.keys(this.types).forEach((type) => {
       this[type] = this._log.bind(this, type);
     });
   }
@@ -61,7 +62,7 @@ class Log {
   }
 
   _log(type, ...args) {
-    const { format, labelLength } = this;
+    const { format, labelLength, types } = this;
     const { badge, color, label } = types[type];
     console.log(
       format(
@@ -81,4 +82,4 @@ class Log {
   }
 }
 
-module.exports = new Log();
+module.exports = Object.assign(new Log(), { Log });
